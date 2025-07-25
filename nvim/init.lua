@@ -162,17 +162,6 @@ require("lazy").setup({
   -- jupytext
   "goerz/jupytext.vim",
 
-  -- Fidget
-  {
-    "j-hui/fidget.nvim",
-    tag = "legacy",
-    config = function()
-      require("fidget").setup({
-        -- options
-      })
-    end,
-  },
-
   -- nvim-nio
   "nvim-neotest/nvim-nio",
 
@@ -815,6 +804,7 @@ require("mason").setup()
 local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
+  automatic_enable = false,
 }
 
 for server_name, _ in pairs(servers) do
