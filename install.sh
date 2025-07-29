@@ -26,6 +26,17 @@ install_neovim() {
     sudo ln -s "/opt/nvim-linux-$CPUTYPE/bin/nvim" /usr/local/bin/vim
 }
 
+maybe_install_nvm() {
+    if command -v nvm >/dev/null 2>&1; then
+        info "nvm is already installed."
+        return
+    fi
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+    nvm install --lts
+}
 
 if [[ $OS == "Darwin" ]]; then
     PM="brew"
@@ -73,3 +84,6 @@ ln -snf "$DOTFILES_ROOT/tmux/.tmux" "$TMUX_CFG"
 # ---- Neovim plugin manager (lazy.nvim) -------------------------------------
 # lazy.nvim will automatically install itself and plugins on first run
 info "Neovim setup complete. Plugins will be installed automatically on first run via lazy.nvim."
+
+# ---- nvm (Node Version Manager) --------------------------------------------
+maybe_install_nvm
