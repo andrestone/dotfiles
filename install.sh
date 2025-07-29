@@ -46,6 +46,9 @@ if [[ $OS == "Darwin" ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv || true)"
     fi
     brew update
+    if ! command -v go >/dev/null 2>&1; then
+        brew install go
+    fi
     brew install tmux neovim git
 
 elif [[ $OS == "Linux" ]]; then
