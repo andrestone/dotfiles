@@ -87,5 +87,9 @@ ln -snf "$DOTFILES_ROOT/tmux/.tmux" "$TMUX_CFG"
 # lazy.nvim will automatically install itself and plugins on first run
 info "Neovim setup complete. Plugins will be installed automatically on first run via lazy.nvim."
 
+# ---- home dotfiles --------------------------------------------------------
+info "Linking home dotfiles…"
+ln -snf "$DOTFILES_ROOT/home/.gitconfig" "$HOME/.gitconfig"
+
 # ---- nvm (Node Version Manager) --------------------------------------------
 maybe_install_nvm
