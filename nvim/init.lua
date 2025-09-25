@@ -1,4 +1,5 @@
 -- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.clipboard = "osc52"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -484,7 +485,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
   debug = true,
   sources = {
-    null_ls.builtins.formatting.biome,
+    -- null_ls.builtins.formatting.biome,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.completion.spell,
     null_ls.builtins.formatting.black.with({
@@ -492,11 +493,15 @@ null_ls.setup({
     }),
     null_ls.builtins.formatting.prettierd.with({
       filetypes = { "json", "css", "scss", "html", "markdown" },
+      prepend_extra_args = { "--print-width", "120" },
+
     }),
     require("none-ls.formatting.eslint_d").with({
+      env = { ESLINT_USE_FLAT_CONFIG = "false" },
       condition = eslint_condition,
     }),
     require("none-ls.diagnostics.eslint_d").with({
+      env = { ESLINT_USE_FLAT_CONFIG = "false" },
       condition = eslint_condition,
     }),
   },
