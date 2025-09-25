@@ -60,7 +60,13 @@ elif [[ $OS == "Linux" ]]; then
         sudo pacman -Syu --noconfirm tmux git
         install_neovim
     else
-        error "Unsupported Linux distro (no apt-get or pacman)."
+        # try yum
+        if command -v yum >/dev/null 2>&1; then
+            sudo yum install -y tmux git
+            install_neovim
+        else
+            error "Unsupported Linux distro: no apt-get, pacman, or yum found."
+        fi
     fi
 else
     error "Unsupported OS: $OS"
