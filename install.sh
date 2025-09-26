@@ -10,7 +10,7 @@ warn()  { printf "\033[1;33m[WARN]\033[0m  %s\n" "$*"; }
 error() { printf "\033[1;31m[ERROR]\033[0m %s\n" "$*"; exit 1; }
 
 # ---- detect OS & pick a package manager -----------------------------------
-CPUTYPE=$(uname -m)
+CPUTYPE=$(uname -m | sed 's/aarch64/arm64/')
 OS=$(uname -s)
 PM=""          # package manager name
 INST=""        # install command (string we eval)
