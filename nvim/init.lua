@@ -492,7 +492,7 @@ null_ls.setup({
       extra_args = { "--line-length", "120" },
     }),
     null_ls.builtins.formatting.prettierd.with({
-      filetypes = { "json", "css", "scss", "html", "markdown" },
+      filetypes = { "json", "css", "scss", "html", "markdown", "typescript" },
       prepend_extra_args = { "--print-width", "120" },
 
     }),
