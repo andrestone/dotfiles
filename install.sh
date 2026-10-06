@@ -50,6 +50,12 @@ if [[ $OS == "Darwin" ]]; then
     fi
     brew install tmux neovim git
 
+    # ---- oh-my-zsh (macOS) --------------------------------------------------
+    if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+        info "Installing oh-my-zsh..."
+        RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+
 elif [[ $OS == "Linux" ]]; then
     if   command -v apt-get >/dev/null 2>&1; then
         sudo apt-get update
@@ -96,6 +102,7 @@ info "Neovim setup complete. Plugins will be installed automatically on first ru
 # ---- home dotfiles --------------------------------------------------------
 info "Linking home dotfiles…"
 ln -snf "$DOTFILES_ROOT/home/.gitconfig" "$HOME/.gitconfig"
+ln -snf "$DOTFILES_ROOT/home/.zshrc" "$HOME/.zshrc"
 
 # ---- nvm (Node Version Manager) --------------------------------------------
 maybe_install_nvm
